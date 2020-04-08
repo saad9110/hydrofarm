@@ -3,7 +3,7 @@
   <a href="#" class="logo">
     <!-- mini logo for sidebar mini 50x50 pixels -->
     <span class="logo-mini"><b>HF</b>S</span>
-    <!-- logo for regular state and mobile devices -->
+    <!-- logo for regular state and mobile  -->
     <span class="logo-lg"><b>HydroFarm</b>Site</span>
   </a>
   <!-- Header Navbar: style can be found in header.less -->
