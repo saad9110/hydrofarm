@@ -9,7 +9,7 @@
 
 		$conn = $pdo->open();
 
-		$stmt = $conn->prepare("SELECT *, COUNT(*) AS numrows FROM users WHERE email=:email");
+		$stmt = $conn->prepare("SELECT *, COUNT(*) AS numrows FROM admins WHERE email=:email");
 		$stmt->execute(['email'=>$email]);
 		$row = $stmt->fetch();
 
@@ -18,7 +18,7 @@
 			$set='123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
 			$code=substr(str_shuffle($set), 0, 15);
 			try{
-				$stmt = $conn->prepare("UPDATE users SET reset_code=:code WHERE id=:id");
+				$stmt = $conn->prepare("UPDATE admins SET reset_code=:code WHERE id=:id");
 				$stmt->execute(['code'=>$code, 'id'=>$row['id']]);
 				
 				$message = "
