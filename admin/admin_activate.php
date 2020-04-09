@@ -13,16 +13,23 @@
 			$headers = "From: HydroFarm";
 
 			// Make Query
+			$query = "SELECT * FROM admins WHERE id=:id";
 
 			// Get Data From Connection Using The Above Data ($id)
+			$stmt = $conn->prepare($query);
+			$email = "";
 
 			// Parse Email From Data
-			
-			// Store In A New Variable
-			$reciever = "";
+			$stmt->execute(['id'=>$id]);
 
+			$result = $stmt->get_result();
+			if($result->num_rows == 1){
+				while($data = $result->fetch_assoc()){
+					$email = $data['email'];
+				}
+			}
 
-			mail($reciever, 
+			mail($email, 
 				"Admin Activation Message", 
 				"Your Account With Hydro Farm Has Been Activate By Admin. Now You Can Login. Thanks", 
 				$headers);
