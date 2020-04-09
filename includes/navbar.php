@@ -102,6 +102,7 @@
               echo "
                 <li><a href='login.php'>LOGIN</a></li>
                 <li><a href='signup.php'>SIGNUP</a></li>
+                <li><a href='user_login.php'>User Login</a></li>
               ";
             }
           ?>

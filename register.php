@@ -38,7 +38,7 @@
 		else{
 			$conn = $pdo->open();
 
-			$stmt = $conn->prepare("SELECT COUNT(*) AS numrows FROM users WHERE email=:email");
+			$stmt = $conn->prepare("SELECT COUNT(*) AS numrows FROM admins WHERE email=:email");
 			$stmt->execute(['email'=>$email]);
 			$row = $stmt->fetch();
 			if($row['numrows'] > 0){
@@ -54,7 +54,7 @@
 				$code=substr(str_shuffle($set), 0, 12);
 
 				try{
-					$stmt = $conn->prepare("INSERT INTO users (email, type, password, firstname, lastname, activate_code, created_on) VALUES (:email, 1, :password, :firstname, :lastname, :code, :now)");
+					$stmt = $conn->prepare("INSERT INTO admins (email, type, password, firstname, lastname, activate_code, created_on) VALUES (:email, 1, :password, :firstname, :lastname, :code, :now)");
 					$stmt->execute(['email'=>$email, 'password'=>$password, 'firstname'=>$firstname, 'lastname'=>$lastname, 'code'=>$code, 'now'=>$now]);
 					$userid = $conn->lastInsertId();
 

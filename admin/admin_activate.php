@@ -7,7 +7,7 @@
 		$conn = $pdo->open();
 
 		try{
-			$stmt = $conn->prepare("UPDATE users SET status=:status WHERE id=:id");
+			$stmt = $conn->prepare("UPDATE admins	 SET status=:status WHERE id=:id");
 			$stmt->execute(['status'=>1, 'id'=>$id]);
 			$_SESSION['success'] = 'User activated successfully and email sent successfully';
 			$headers = "From: sender\'s email";

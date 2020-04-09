@@ -9,7 +9,7 @@
 
 		try{
 
-			$stmt = $conn->prepare("SELECT *, COUNT(*) AS numrows FROM admins WHERE email = :email");
+			$stmt = $conn->prepare("SELECT *, COUNT(*) AS numrows FROM users WHERE email = :email");
 			$stmt->execute(['email'=>$email]);
 			$row = $stmt->fetch();
 			if($row['numrows'] > 0){
@@ -23,7 +23,7 @@
 							}
 						}
 						else{
-							$_SESSION['admin'] = $row['id'];
+							$_SESSION['user'] = $row['id'];
 						}
 					}
 					else{
@@ -31,7 +31,7 @@
 					}
 				}
 				else{
-					$_SESSION['error'] = 'Account not activated. Wait for the Super Admin Approval';
+					$_SESSION['error'] = 'Account not activated. Wait for the Super User Approval';
 				}
 			}
 			else{
@@ -49,6 +49,6 @@
 
 	$pdo->close();
 
-	header('location: login.php');
+	header('location: user_login.php');
 
 ?>

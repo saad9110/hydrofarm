@@ -221,6 +221,34 @@ INSERT INTO `sales` (`id`, `user_id`, `pay_id`, `sales_date`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `admins`
+--
+
+CREATE TABLE IF NOT EXISTS `admins` (
+`id` int(11) NOT NULL,
+  `email` varchar(200) NOT NULL,
+  `password` varchar(60) NOT NULL,
+  `type` int(1) NOT NULL,
+  `firstname` varchar(50) NOT NULL,
+  `lastname` varchar(50) NOT NULL,
+  `address` text NOT NULL,
+  `contact_info` varchar(100) NOT NULL,
+  `photo` varchar(200) NOT NULL,
+  `status` int(1) NOT NULL,
+  `activate_code` varchar(15) NOT NULL,
+  `reset_code` varchar(15) NOT NULL,
+  `created_on` date NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=30 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `admins`
+--
+
+INSERT INTO `admins` (`id`, `email`, `password`, `type`, `firstname`, `lastname`, `address`, `contact_info`, `photo`, `status`, `activate_code`, `reset_code`, `created_on`) VALUES
+(1, 'admin@admin.com', '$2y$10$0SHFfoWzz8WZpdu9Qw//E.tWamILbiNCX7bqhy3od0gvK5.kSJ8N2', 1, 'Code', 'Projects', '', '', 'thanos1.jpg', 1, '', '', '2018-05-01')
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `users`
 --
 
@@ -299,6 +327,11 @@ ALTER TABLE `sales`
 ALTER TABLE `users`
  ADD PRIMARY KEY (`id`);
 
+ -- Indexes for table `admins`
+--
+ALTER TABLE `admins`
+ ADD PRIMARY KEY (`id`);
+
 
 
 --
@@ -342,6 +375,9 @@ MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=11;
 --
 ALTER TABLE `users`
 MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=13;
+
+ALTER TABLE `admins`
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=30;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
