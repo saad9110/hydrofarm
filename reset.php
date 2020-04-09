@@ -63,7 +63,10 @@
 
 			//         $mail->send();
 
-			        $_SESSION['success'] = 'Password reset link sent';
+			// Write Your Query Here
+			
+
+			$_SESSION['success'] = 'Password reset link sent';
 			     
 			//     } 
 			//     catch (Exception $e) {
