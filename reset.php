@@ -26,9 +26,15 @@
 					<p>Your Account:</p>
 					<p>Email: ".$email."</p>
 					<p>Please click the link below to reset your password.</p>
-					<a href='http://localhost/ecommerce/password_reset.php?code=".$code."&user=".$row['id']."'>Reset Password</a>
+					<a href='http://localhost/hydrofarm/password_reset.php?code=".$code."&user=".$row['id']."'>Reset Password</a>
 				";
-
+			
+				$email = $result['email'];
+	
+				mail($email, 
+					"Admin Activation Message", 
+					"Your Account With Hydro Farm Has Been Activate By Admin. Now You Can Login. Thanks", 
+					$headers);
 				// Load phpmailer
 	    		// require 'vendor/autoload.php';
 
@@ -62,8 +68,6 @@
 			//         $mail->Body    = $message;
 
 			//         $mail->send();
-
-			// Write Your Query Here
 			
 
 			$_SESSION['success'] = 'Password reset link sent';
