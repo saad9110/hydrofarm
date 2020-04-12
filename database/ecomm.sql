@@ -23,6 +23,18 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `order`
+--
+
+CREATE TABLE IF NOT EXISTS `order` (
+`id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `product_id` int(11) NOT NULL,
+  `quantity` int(11) NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=34 DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+--
 -- Table structure for table `cart`
 --
 
@@ -31,9 +43,7 @@ CREATE TABLE IF NOT EXISTS `cart` (
   `user_id` int(11) NOT NULL,
   `product_id` int(11) NOT NULL,
   `quantity` int(11) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
+) ENGINE=InnoDB AUTO_INCREMENT=34 DEFAULT CHARSET=latin1;
 
 --
 -- Table structure for table `category`
@@ -54,6 +64,28 @@ INSERT INTO `category` (`id`, `name`, `cat_slug`) VALUES
 (2, 'Desktop PC', 'desktop-pc'),
 (3, 'Tablets', 'tablets'),
 (4, 'Smart Phones', '');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `order Status`
+--
+
+CREATE TABLE IF NOT EXISTS `order_status` (
+`id` int(11) NOT NULL,
+  `status` varchar(100) NOT NULL,
+  `cat_slug` varchar(150) NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `ORder Status`
+--
+
+INSERT INTO `order_status` (`id`, `status`, `cat_slug`) VALUES
+(1, 'Ordered', 'ordered'),
+(2, 'Dispatched', 'dispatched'),
+(3, 'Delievered', 'delievered'),
+(4, 'Cancelled', 'cancelled');
 
 
 
@@ -292,6 +324,12 @@ ALTER TABLE `cart`
 --
 ALTER TABLE `category`
  ADD PRIMARY KEY (`id`);
+
+ --
+-- Indexes for table `order status`
+--
+ALTER TABLE `order_status`
+ ADD PRIMARY KEY (`id`);
 --
 -- Indexes for table `guidelines_category`
 --
@@ -345,6 +383,9 @@ MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=9;
 ALTER TABLE `category`
 MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
 --
+ALTER TABLE `order_status`
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
+
 -- AUTO_INCREMENT for table `guidelines_category`
 --
 ALTER TABLE `guidelines_category`
