@@ -30,8 +30,16 @@ CREATE TABLE IF NOT EXISTS `order` (
 `id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
   `product_id` int(11) NOT NULL,
-  `quantity` int(11) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=34 DEFAULT CHARSET=latin1;
+  `quantity` int(11) NOT NULL,
+  `order_date` date NOT NULL,
+  `status` int(1) NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=35 DEFAULT CHARSET=latin1;
+
+
+INSERT INTO `order` (`id`, `user_id`, `product_id`, `quantity`, `order_date`, `status`) VALUES
+(35, 9, 4, 3, '2018-05-10', 1);
+
+
 
 -- --------------------------------------------------------
 --
@@ -250,6 +258,7 @@ INSERT INTO `sales` (`id`, `user_id`, `pay_id`, `sales_date`) VALUES
 (9, 9, 'PAY-1RT494832H294925RLLZ7TZA', '2018-05-10'),
 (10, 9, 'PAY-21700797GV667562HLLZ7ZVY', '2018-05-10');
 
+
 -- --------------------------------------------------------
 
 --
@@ -318,6 +327,12 @@ INSERT INTO `users` (`id`, `email`, `password`, `type`, `firstname`, `lastname`,
 --
 ALTER TABLE `cart`
  ADD PRIMARY KEY (`id`);
+ 
+--
+-- Indexes for table `order`
+--
+ALTER TABLE `order`
+ ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `category`
@@ -377,6 +392,9 @@ ALTER TABLE `admins`
 --
 ALTER TABLE `cart`
 MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=9;
+
+ALTER TABLE `order`
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=35;
 --
 -- AUTO_INCREMENT for table `category`
 --

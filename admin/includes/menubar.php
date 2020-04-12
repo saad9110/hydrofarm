@@ -36,7 +36,7 @@
         </ul>
       </li>
       <li><a href="guidelines.php"><i class="fa fa-users"></i> <span>Guidelines</span></a></li>
-      <li><a href="order.php"><i class="fa fa-first-order"></i> <span>Orders</span></a></li>
+      <li><a href="order_view.php"><i class="fa fa-first-order"></i> <span>Orders</span></a></li>
       <li><a href="#"><i class="fa fa-users"></i> <span>Blogs</span></a></li>
       <li><a href="#"><i class="fa fa-users"></i> <span>Forums</span></a></li>
 

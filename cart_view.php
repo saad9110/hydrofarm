@@ -32,7 +32,7 @@
 	        		<?php
 	        			if(isset($_SESSION['user'])){
 	        				echo "
-								<button class='btn btn-info btn-sm btn-flat' data-id='".$row['id']."'><i class='fa fa-search'></i> Submit</button>
+								<button class='btn btn-info btn-sm btn-flat' onClick='getO()'><i class='fa fa-search'></i> Submit</button>
 	        				";
 	        			}
 	        			else{
@@ -55,6 +55,7 @@
 </div>
 
 <?php include 'includes/scripts.php'; ?>
+
 <script>
 var total = 0;
 $(function(){
@@ -128,11 +129,15 @@ $(function(){
 			}
 		});
 	});
+	
 
 	getDetails();
 	getTotal();
 
 });
+
+
+
 
 function getDetails(){
 	$.ajax({
@@ -153,6 +158,15 @@ function getTotal(){
 		dataType: 'json',
 		success:function(response){
 			total = response;
+		}
+	});
+}
+function getO(){
+	$.ajax({
+		type: 'POST',
+		url: 'order_placed.php',
+		success:function(response){
+			console.log(response)
 		}
 	});
 }
