@@ -14,7 +14,7 @@
 		$row = $stmt->fetch();
 
 		if($row['numrows'] > 0){
-			//generate code
+			// Generate code
 			$set='123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
 			$code=substr(str_shuffle($set), 0, 15);
 			try{
@@ -28,15 +28,17 @@
 					<p>Please click the link below to reset your password.</p>
 					<a href='http://localhost/hydrofarm/password_reset.php?code=".$code."&user=".$row['id']."'>Reset Password</a>
 				";
-			
-				$email = $result['email'];
-	
+
+				$email = $row['email'];
+
+				$headers = "From: HydroFarm";
+
 				mail($email, 
 					"Admin Activation Message", 
-					"Your Account With Hydro Farm Has Been Activate By Admin. Now You Can Login. Thanks", 
+					$message, 
 					$headers);
 
-			$_SESSION['success'] = 'Password reset link sent';
+				$_SESSION['success'] = 'Password reset link sent';
 			}
 			catch(PDOException $e){
 				$_SESSION['error'] = $e->getMessage();
