@@ -52,7 +52,7 @@
                             $conn = $pdo->open();
 
                             try{
-                            $stmt = $conn->prepare("SELECT *, order.id AS orderid FROM order LEFT JOIN users ON users.id=order.user_id ORDER BY order_date DESC");
+                            $stmt = $conn->prepare("SELECT *, order.id AS orderid FROM `order` LEFT JOIN `users` ON users.id=order.user_id ORDER BY order_date DESC");
                             $stmt->execute();
                             foreach($stmt as $row){
                                 $stmt = $conn->prepare("SELECT * FROM details LEFT JOIN products ON products.id=details.product_id WHERE details.order_id=:id");
@@ -65,13 +65,13 @@
                                 echo "
                                 <tr>
                                     <td class='hidden'></td>
-                                    <td>".date('M d, Y', strtotime($row['sales_date']))."</td>
+                                    <td>".date('M d, Y', strtotime($row['order_date']))."</td>
                                     <td>".$row['firstname'].' '.$row['lastname']."</td>
                                     <td>&#36; ".number_format($total, 2)."</td>
                                     
                                     <td>
-                                        <button type='button' class='btn btn-info btn-sm btn-flat transact' data-id='".$row['salesid']."'><i class='fa fa-search'></i> View</button>
-                                        <button class='btn btn-success btn-sm transact btn-flat' data-id='".$row['id']."'><i class='fa fa-edit'></i> Edit</button>
+                                        <button type='button' class='btn btn-info btn-sm btn-flat ordlist' data-id='".$row['orderid']."'><i class='fa fa-search'></i> View</button>
+                                        <button class='btn btn-success btn-sm ordlist btn-flat' data-id='".$row['id']."'><i class='fa fa-edit'></i> Edit</button>
                                     </td>
                                 </tr>
                                 ";
@@ -149,9 +149,9 @@ $(function(){
 </script>
 <script>
 $(function(){
-  $(document).on('click', '.transact', function(e){
+  $(document).on('click', '.ordlist', function(e){
     e.preventDefault();
-    $('#transaction').modal('show');
+    $('#orderlist').modal('show');
     var id = $(this).data('id');
     $.ajax({
       type: 'POST',
@@ -166,7 +166,7 @@ $(function(){
     });
   });
 
-  $("#transaction").on("hidden.bs.modal", function () {
+  $("#orderlist").on("hidden.bs.modal", function () {
       $('.prepend_items').remove();
   });
 });
