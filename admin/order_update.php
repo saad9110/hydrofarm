@@ -1,14 +1,17 @@
 <?php
 	include 'includes/session.php';
+	include 'includes/slugify.php';
 
 	if(isset($_POST['edit'])){
-		$id = $_POST['id'];
-		$name = $_POST['name'];
+		$category = $_POST['order_status'];
+
+
+		$conn = $pdo->open();
 
 		try{
-			$stmt = $conn->prepare("UPDATE `order` SET name=:name WHERE id=:id");
-			$stmt->execute(['name'=>$name, 'id'=>$id]);
-			$_SESSION['success'] = 'Category updated successfully';
+			$stmt = $conn->prepare("UPDATE order SET  category_id=:category, price=:price, description=:description WHERE id=:id");
+			$stmt->execute(['name'=>$name, 'slug'=>$slug, 'category'=>$category, 'price'=>$price, 'description'=>$description, 'id'=>$id]);
+			$_SESSION['success'] = 'Product updated successfully';
 		}
 		catch(PDOException $e){
 			$_SESSION['error'] = $e->getMessage();
@@ -17,9 +20,9 @@
 		$pdo->close();
 	}
 	else{
-		$_SESSION['error'] = 'Fill up edit category form first';
+		$_SESSION['error'] = 'Fill up edit product form first';
 	}
 
-	header('location: category.php');
+	header('location: products.php');
 
 ?>

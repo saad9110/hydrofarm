@@ -55,7 +55,7 @@
                             $stmt = $conn->prepare("SELECT *, order.id AS orderid FROM `order` LEFT JOIN `users` ON users.id=order.user_id ORDER BY order_date DESC");
                             $stmt->execute();
                             foreach($stmt as $row){
-                                $stmt = $conn->prepare("SELECT * FROM details LEFT JOIN products ON products.id=details.product_id WHERE details.order_id=:id");
+                                $stmt = $conn->prepare("SELECT * FROM `details` LEFT JOIN `products` ON products.id=details.product_id WHERE details.order_id=:id");
                                 $stmt->execute(['id'=>$row['orderid']]);
                                 $total = 0;
                                 foreach($stmt as $details){
@@ -69,9 +69,13 @@
                                     <td>".$row['firstname'].' '.$row['lastname']."</td>
                                     <td>&#36; ".number_format($total, 2)."</td>
                                     
+                                    <td>".$row['order_status']."</td>
+                                    
                                     <td>
-                                        <button type='button' class='btn btn-info btn-sm btn-flat ordlist' data-id='".$row['orderid']."'><i class='fa fa-search'></i> View</button>
-                                        <button class='btn btn-success btn-sm ordlist btn-flat' data-id='".$row['id']."'><i class='fa fa-edit'></i> Edit</button>
+                                        <button type='button' class='btn btn-info btn-sm btn-flat orderlist' data-id='".$row['orderid']."'><i class='fa fa-search'></i> View</button>
+                                           
+                                        <span><a href='#update_status' class='btn btn-success btn-sm edit btn-flat' data-toggle='modal' data-id='".$row['id']."'><i class='fa fa-edit'>Update Status</i></a></span>
+                                        
                                     </td>
                                 </tr>
                                 ";
@@ -117,6 +121,7 @@ $(function(){
     var id = $(this).data('id');
     getRow(id);
   });
+  
   //Timepicker
   $('.timepicker').timepicker({
     showInputs: false
@@ -149,9 +154,9 @@ $(function(){
 </script>
 <script>
 $(function(){
-  $(document).on('click', '.ordlist', function(e){
+  $(document).on('click', '.orderlist', function(e){
     e.preventDefault();
-    $('#orderlist').modal('show');
+    $('#ordlist').modal('show');
     var id = $(this).data('id');
     $.ajax({
       type: 'POST',
@@ -166,7 +171,7 @@ $(function(){
     });
   });
 
-  $("#orderlist").on("hidden.bs.modal", function () {
+  $("#ordlist").on("hidden.bs.modal", function () {
       $('.prepend_items').remove();
   });
 });

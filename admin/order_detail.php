@@ -22,6 +22,7 @@
 				<td>&#36; ".number_format($row['price'], 2)."</td>
 				<td>".$row['quantity']."</td>
 				<td>&#36; ".number_format($subtotal, 2)."</td>
+				
 			</tr>
 		";
 	}
