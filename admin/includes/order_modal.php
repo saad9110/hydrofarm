@@ -15,13 +15,14 @@
               <table class="table table-bordered">
                 <thead>
                   <th>Product</th>
+                  <th>Order Status</th>
                   <th>Price</th>
                   <th>Quantity</th>
                   <th>Subtotal</th>
                 </thead>
                 <tbody id="detail">
                   <tr>
-                    <td colspan="3" align="right"><b>Total</b></td>
+                    <td colspan="4" align="right"><b>Total</b></td>
                     <td><span id="total"></span></td>
                   </tr>
                 </tbody>
