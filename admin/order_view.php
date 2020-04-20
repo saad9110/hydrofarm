@@ -68,7 +68,7 @@
                                     <td>".date('M d, Y', strtotime($row['order_date']))."</td>
                                     <td>".$row['firstname'].' '.$row['lastname']."</td>
                                     <td>&#36; ".number_format($total, 2)."</td>
-                                    
+                      
                                     <td>".$row['order_status']."</td>
                                     
                                     <td>
