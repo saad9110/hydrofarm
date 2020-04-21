@@ -7,8 +7,21 @@
 		try{
             $stmt = $conn->prepare("SELECT * FROM cart WHERE user_id=:user_id");
 			$stmt->execute(['user_id'=>$user['id']]);
+
+
+		 
+			//$menu_data_query = "SELECT * FROM menu WHERE menu_id = $menu_id";
+			//$result_query    = $con->query($menu_data_query);
+			//$menu_data       = mysqli_fetch_array($result_query);
+ 
+//			exit;
+
 			foreach($stmt as $row){
 
+
+				
+
+				
                     $stmt = $conn->prepare("INSERT INTO `order` (user_id, product_id, quantity) VALUES (:user_id, :product_id, :quantity)");
 					$stmt->execute(['user_id'=>$user['id'], 'product_id'=>$row['product_id'], 'quantity'=>$row['quantity']]);
 					
