@@ -123,33 +123,28 @@
             <a href="users.php" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
           </div>
         </div>
-        <!-- ./col -->
-        <div class="col-lg-3 col-xs-6">
+                <!-- ./col -->
+                <div class="col-lg-3 col-xs-6">
           <!-- small box -->
           <div class="small-box bg-red">
             <div class="inner">
               <?php
-                $stmt = $conn->prepare("SELECT * FROM details LEFT JOIN sales ON sales.id=details.sales_id LEFT JOIN products ON products.id=details.product_id WHERE sales_date=:sales_date");
-                $stmt->execute(['sales_date'=>$today]);
+                $stmt = $conn->prepare("SELECT *, COUNT(*) AS numrows FROM sales");
+                $stmt->execute();
+                $urow =  $stmt->fetch();
 
-                $total = 0;
-                foreach($stmt as $trow){
-                  $subtotal = $trow['price']*$trow['quantity'];
-                  $total += $subtotal;
-                }
-
-                echo "<h3>&#36; ".number_format_short($total, 2)."</h3>";
-                
+                echo "<h3>".$urow['numrows']."</h3>";
               ?>
-
-              <p>Sales Today</p>
+             
+              <p>Number of Sales</p>
             </div>
             <div class="icon">
-              <i class="fa fa-money"></i>
+            <i class="fa fa-money"></i>
             </div>
             <a href="sales.php" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
           </div>
         </div>
+        
         <!-- ./col -->
       </div>
       <!-- /.row -->
