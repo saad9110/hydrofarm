@@ -5,6 +5,13 @@
 session_start();
 			<?php include 'includes/navbar.php'; ?>
 			<?php include 'includes/menubar.php'; ?>
+			<?php include 'includes/order_modal.php'; ?>
+
+			
+			<!--Start -->
+
+
+			<!--End -->
 
 			<!-- Content Wrapper. Contains page content -->
 			<div class="content-wrapper">
@@ -80,10 +87,11 @@ session_start();
 												<td> <?php echo $order_data["ordernum_category"] ;?> </td>
 												
 												<td>
-													<a href="order_detail.php?id=<?php echo$order_data["ordernum_id"];?>" title="Detail" data-toggle="tooltip" data-original-title="view">
+													 <a type="button" data-toggle="modal" data-target="#myModal">
 														<i class="fa fa-eye">
 														</i>
 													</a>
+													<!-- <button type="button" data-toggle="modal" data-target="#myModal">Open Modal</button> -->
 													<a onclick="update(<?php echo$order_data["ordernum_id"]; ?>)" title="complete"  data-toggle="tooltip" data-original-title="Edit">
 														<i class="fa fa-check">
 														</i>
@@ -116,8 +124,6 @@ session_start();
 				
 			</div>
 			<?php include 'includes/footer.php'; ?>
-			<?php include 'includes/order_modal.php'; ?>
-
 		</div>
 		<!-- ./wrapper -->
 
