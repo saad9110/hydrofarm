@@ -1,28 +1,33 @@
 <?php
-	include 'includes/session.php';
-	include 'includes/slugify.php';
+error_reporting(0);
+session_start();
+$update = 0;
+$con = @mysqli_connect('localhost', 'root', '', 'ecomm');
 
-	if(isset($_POST['edit'])){
-		$category = $_POST['order_status'];
 
 
-		$conn = $pdo->open();
+$cancel = $_GET['deleteid'];
+//echo $cancel;
+//exit;
 
-		try{
-			$stmt = $conn->prepare("UPDATE order SET  category_id=:category, price=:price, description=:description WHERE id=:id");
-			$stmt->execute(['name'=>$name, 'slug'=>$slug, 'category'=>$category, 'price'=>$price, 'description'=>$description, 'id'=>$id]);
-			$_SESSION['success'] = 'Product updated successfully';
-		}
-		catch(PDOException $e){
-			$_SESSION['error'] = $e->getMessage();
-		}
-		
-		$pdo->close();
-	}
-	else{
-		$_SESSION['error'] = 'Fill up edit product form first';
-	}
+$update = $_GET['updateid'];
+if($update != 0){
+   $sql = "update `ordernumber` set ordernum_category = 'Completed' where ordernum_id = '".$update."'"; 
+   $result = $con->query($sql);
+    header("Location: order_view.php");
+}
 
-	header('location: products.php');
+if($cancel != null){
+    $sql = "update `ordernumber` set ordernum_category = 'Cancel' where ordernum_id = '".$cancel."'"; 
+    $update_result = $con->query($sql);
+    header("Location: order_view.php");
+}
+//$name = $_GET['name'];
+$price = $_GET['price'];
+$user_id = $_GET['user_id'];
+
+$sql = "INSERT INTO `sales` (pay_id,user_id) VALUES ('$price','$user_id')";
+$result= $con->query($sql);
+header("Location: order_view.php");
 
 ?>

@@ -2,28 +2,27 @@
 	include 'includes/session.php';
 	$conn = $pdo->open();
 
+    
 
 	if(isset($_SESSION['user'])){
+       
+        $con = @mysqli_connect('localhost', 'root', '', 'ecomm');
+        $query = mysqli_query($con,"SELECT * FROM ordernumber ORDER BY ordernum_id DESC LIMIT 0, 1");
+        $result = mysqli_fetch_array($query);
+        $row['ordernum_id'] = $result['ordernum_id']+1;
+        $orderid = $result['ordernum_id']+1;
+        $orderstatus = "Pending";
+            $userid =$_SESSION['user'];
+        	$sql = "INSERT INTO ordernumber (ordernum_category,id) VALUES ('$orderstatus', '$userid')";
+				$result = $con->query($sql);
+
 		try{
             $stmt = $conn->prepare("SELECT * FROM cart WHERE user_id=:user_id");
 			$stmt->execute(['user_id'=>$user['id']]);
-
-
-		 
-			//$menu_data_query = "SELECT * FROM menu WHERE menu_id = $menu_id";
-			//$result_query    = $con->query($menu_data_query);
-			//$menu_data       = mysqli_fetch_array($result_query);
- 
-//			exit;
-
 			foreach($stmt as $row){
 
-
-				
-
-				
-                    $stmt = $conn->prepare("INSERT INTO `order` (user_id, product_id, quantity) VALUES (:user_id, :product_id, :quantity)");
-					$stmt->execute(['user_id'=>$user['id'], 'product_id'=>$row['product_id'], 'quantity'=>$row['quantity']]);
+                    $stmt = $conn->prepare("INSERT INTO `order` (user_id, product_id, quantity,ordernum_id) VALUES (:user_id, :product_id, :quantity,:ordernum_id)");
+					$stmt->execute(['user_id'=>$user['id'], 'product_id'=>$row['product_id'], 'quantity'=>$row['quantity'], 'ordernum_id'=>$orderid]);
 					
 			try{
 				$stmt = $conn->prepare("SELECT * FROM `order` LEFT JOIN products ON products.id=order.product_id WHERE user_id=:user_id");

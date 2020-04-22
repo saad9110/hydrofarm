@@ -262,6 +262,27 @@ INSERT INTO `sales` (`id`, `user_id`, `pay_id`, `sales_date`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `ordernumber`
+--
+
+CREATE TABLE `ordernumber` (
+  `ordernum_id` int(20) NOT NULL,
+  `ordernum_category` varchar(50) NOT NULL,
+  `order_Date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `ordernumber`
+--
+
+INSERT INTO `ordernumber` (`ordernum_id`, `ordernum_category`, `order_Date`, `id`) VALUES
+(6, 'Pending', '2020-04-22 10:28:55', 20),
+(7, 'Pending', '2020-04-22 10:46:28', 20);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `admins`
 --
 
@@ -340,6 +361,13 @@ ALTER TABLE `order`
 ALTER TABLE `category`
  ADD PRIMARY KEY (`id`);
 
+
+ -- Indexes for table `ordernumber`
+--
+ALTER TABLE `ordernumber`
+  ADD PRIMARY KEY (`ordernum_id`),
+  ADD KEY `usersid` (`id`);
+
  --
 -- Indexes for table `order status`
 --
@@ -413,6 +441,11 @@ MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
 --
 ALTER TABLE `details`
 MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=21;
+
+-- AUTO_INCREMENT for table `ordernumber`
+--
+ALTER TABLE `ordernumber`
+  MODIFY `ordernum_id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 --
 -- AUTO_INCREMENT for table `products`
 --

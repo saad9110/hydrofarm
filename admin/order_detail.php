@@ -1,34 +1,71 @@
 <?php
-	include 'includes/session.php';
-
-	$id = $_POST['id'];
-
-	$conn = $pdo->open();
-
-	$output = array('list'=>'');
-
-	$stmt = $conn->prepare("SELECT * FROM `details` LEFT JOIN `products` ON products.id=details.product_id LEFT JOIN `order` ON order.id=details.order_id WHERE details.order_id=:id");
-	$stmt->execute(['id'=>$id]);
-
-	$total = 0;
-	foreach($stmt as $row){
-		
-		$output['date'] = date('M d, Y', strtotime($row['order_date']));
-		$subtotal = $row['price']*$row['quantity'];
-		$total += $subtotal;
-		$output['list'] .= "
-			<tr class='prepend_items'>
-				<td>".$row['name']."</td>
-				<td>&#36; ".number_format($row['price'], 2)."</td>
-				<td>".$row['quantity']."</td>
-				<td>&#36; ".number_format($subtotal, 2)."</td>
-				
-			</tr>
-		";
+	$con = new mysqli('localhost', 'root', '', 'ecomm');
+	if(!$con){
+		echo "DATABASE ERORR";
+		exit;
 	}
-	
-	$output['total'] = '<b>&#36; '.number_format($total, 2).'<b>';
-	$pdo->close();
-	echo json_encode($output);
+	$id = $_GET['id'];
+	$query = "SELECT * FROM `order` o 
+	join `products` p on o.product_id = p.id
+	join `ordernumber` t on o.ordernum_id = t.ordernum_id WHERE o.ordernum_id = '".$id."'";
+	$row =$con->query($query);
+	$subtotal=0;  $total = 0;
+	?>
 
-?>
+	<div class="jumbotron">
+		<table class="table table-bordered">
+			<thead>
+				<tr>
+					<th>Order ID</th>
+					<th>Product</th>
+					<th>Order Status</th>
+					<th>Price</th>
+					<th>Quantity</th>
+					<th>Subtotal</th>
+				</tr></thead>
+
+				<tbody id="detail">
+					<?php while($data = mysqli_fetch_array($row)) :
+						?>
+						<tr>
+							<td>
+								<?php echo $data["ordernum_id"] ;?>
+							</td>
+							<td>
+								<?php echo $data["name"] ;?>  
+							</td>
+							<td>
+								<?php echo $data["ordernum_category"] ;?>  
+							</td>
+							<td>
+								<?php echo $data["price"] ;?>  
+							</td>
+							<td>
+								<?php echo $data["quantity"] ;?>  
+							</td>
+							<td>
+								<?php echo $data["quantity"]*$data["price"] ;?>  
+							</td>
+						</tr>
+                    <?php 
+                    
+							$total = $total + ($data["price"]*$data["quantity"]);
+                            $subtotal = $subtotal + $total;
+                            $total = 0;
+                    endwhile ;  ?>
+				</tbody>
+				<tr>
+					<td colspan="4" align="right"><b>Total</b></td>
+					<td><span id="total"><b>
+						<?php 
+						echo $subtotal;
+						?>
+						<b></b></b></span></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		
+
+        <!-- update `ordernumber` set ordercategory = 'Completed' where ordernum_id = $id; -->
+        <!-- update `ordernumber` set ordercategory = 'Deleted' where ordernum_id = $id;  -->

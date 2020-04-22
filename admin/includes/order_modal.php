@@ -1,6 +1,19 @@
+<?php
 
+	$con = new mysqli('localhost', 'root', '', 'ecomm');
+	if(!$con){
+		echo "DATABASE ERORR";
+		exit;
+	}
+	$id = $_GET['id'];
+	$query = "SELECT * FROM `order` o 
+	join `products` p on o.product_id = p.id
+	join `ordernumber` t on o.ordernum_id = t.ordernum_id WHERE o.ordernum_id = '".$id."'";
+	$row =$con->query($query);
+	$subtotal=0;  $total = 0;
+	?>
 <!-- View Order -->
-<div class="modal fade" id="ordlist">
+<div class="modal fade" id="detail">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -14,16 +27,47 @@
               </p>
               <table class="table table-bordered">
                 <thead>
-                  <th>Product</th>
+                  <th>Order ID</th>
+                  <th>Product Name</th>
                   <th>Order Status</th>
                   <th>Price</th>
                   <th>Quantity</th>
                   <th>Subtotal</th>
                 </thead>
                 <tbody id="detail">
+                <?php while($data = mysqli_fetch_array($row)) :
+                    ?>
+                    <tr>
+                      <td>
+                        <?php echo $data["ordernum_id"] ;?>
+                      </td>
+                      <td>
+                        <?php echo $data["name"] ;?>  
+                      </td>
+                      <td>
+                        <?php echo $data["ordernum_category"] ;?>  
+                      </td>
+                      <td>
+                        <?php echo $data["price"] ;?>  
+                      </td>
+                      <td>
+                        <?php echo $data["quantity"] ;?>  
+                      </td>
+                      <td>
+                        <?php echo $data["quantity"]*$data["price"] ;?>  
+                      </td>
+                    </tr>
+                <?php 
+                    $total = $total + ($data["price"]*$data["quantity"]);
+                                  $subtotal = $subtotal + $total;
+                                  $total = 0;
+                          endwhile ;  ?>
                   <tr>
-                    <td colspan="4" align="right"><b>Total</b></td>
-                    <td><span id="total"></span></td>
+                    <td colspan="5" align="right"><b>Total</b></td>
+                    <td><span id="total"></span>
+                    <?php 
+						            echo $subtotal;
+						        ?></td>
                   </tr>
                 </tbody>
               </table>

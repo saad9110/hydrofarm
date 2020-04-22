@@ -167,6 +167,8 @@ function getO(){
 		url: 'order_placed.php',
 		success:function(response){
 			console.log(response)
+			location.reload();
+			
 		}
 	});
 }
