@@ -86,11 +86,11 @@ session_start();
 												
 												<td>
 													 <a type="button" data-toggle="modal" data-target="#myModal">
-														<i class="fa fa-eye">
+														<i class="fa fa-eye" style="cursor:pointer;" title="View Detail">
 														</i>
 													</a>
 													
-													<a onclick="compelte(<?php echo$order_data["ordernum_id"]; ?>)" title="complete"  data-toggle="tooltip" data-original-title="Edit">
+													<a onclick="update(<?php echo$order_data["ordernum_id"]; ?>)" style="cursor:pointer;" title="complete"  data-toggle="tooltip" data-original-title="Edit">
 														<i class="fa fa-check">
 														</i>
 													</a>
@@ -98,7 +98,8 @@ session_start();
 														<i class="fa fa-remove text-danger">
 														</i>
 													</a><?php
-													if ($order_data["ordernum_category"] == 'Completed'){
+													if ($order_data["ordernum_category"] == 'Comni arhi naw
+													pleted'){
 				?>
                          							 <a href="order_update.php?user_id=<?php echo$order_data["id"]; ?>&&price=<?php echo$subtotal; ?>" style="cursor:pointer;" title="Move Data" data-toggle="tooltip" data-original-title="Save To sale">
 														<i class="fa fa-upload text-success">

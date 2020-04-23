@@ -1,7 +1,7 @@
 <?php
 error_reporting(0);
 session_start();
-$compelte = 0;
+$update = 0;
 $con = @mysqli_connect('localhost', 'root', '', 'ecomm');
 
 
@@ -10,9 +10,9 @@ $cancel = $_GET['deleteid'];
 //echo $cancel;
 //exit;
 
-$compelte = $_GET['updateid'];
-if($compelte != 0){
-   $sql = "update `ordernumber` set ordernum_category = 'Completed' where ordernum_id = '".$compelte."'"; 
+$update = $_GET['updateid'];
+if($update != 0){
+   $sql = "update `ordernumber` set ordernum_category = 'Completed' where ordernum_id = '".$update."'"; 
    $result = $con->query($sql);
     header("Location: order_view.php");
 }
