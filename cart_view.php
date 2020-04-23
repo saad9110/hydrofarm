@@ -10,6 +10,28 @@
 
 	      <!-- Main content -->
 	      <section class="content">
+		  <?php
+					if(isset($_SESSION['error'])){
+					echo "
+						<div class='alert alert-danger alert-dismissible'>
+						<button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button>
+						<h4><i class='icon fa fa-warning'></i> Error!</h4>
+						".$_SESSION['error']."
+						</div>
+					";
+					unset($_SESSION['error']);
+					}
+					if(isset($_SESSION['success'])){
+					echo "
+						<div class='alert alert-success alert-dismissible'>
+						<button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button>
+						<h4><i class='icon fa fa-check'></i> Success!</h4>
+						".$_SESSION['success']."
+						</div>
+					";
+					unset($_SESSION['success']);
+					}
+    			  ?>
 	        <div class="row">
 	        	<div class="col-sm-9">
 	        		<h1 class="page-header">YOUR CART</h1>
@@ -31,7 +53,9 @@
 	        		</div>
 	        		<?php
 	        			if(isset($_SESSION['user'])){
-	        				echo "
+							$_SESSION['success'] = 'Order has been Placed';
+							echo "
+								
 								<button class='btn btn-info btn-sm btn-flat' onClick='getO()'><i class='fa fa-search'></i> Submit</button>
 	        				";
 	        			}

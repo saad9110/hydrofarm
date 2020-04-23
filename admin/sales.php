@@ -67,7 +67,8 @@
                             <td>".date('M d, Y', strtotime($row['sales_date']))."</td>
                             <td>".$row['firstname'].' '.$row['lastname']."</td>
                             <td>&#36;".$row['pay_id']."</td>
-                            <td><button type='button' class='btn btn-info btn-sm btn-flat transact' data-id='".$row['salesid']."'><i class='fa fa-search'></i> View</button></td>
+                            <td><button type='button' class='btn btn-info btn-sm btn-flat view' data-id='".$row['salesid']."'><i class='fa fa-search'></i> View</button>
+                            <button type='button' class='btn btn-danger btn-sm btn-flat del' data-id='".$row['salesid']."'><i class='fa fa-search'></i> Delete</button></td>
                           </tr>
                         ";
                       }
