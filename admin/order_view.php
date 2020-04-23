@@ -86,7 +86,7 @@ session_start();
 												
 												<td>
 													 <a type="button" data-toggle="modal" data-target="#myModal">
-														<i class="fa fa-eye" style="cursor:pointer;" title="View Detail">
+														<i class="fa fa-eye" >
 														</i>
 													</a>
 													
@@ -98,8 +98,7 @@ session_start();
 														<i class="fa fa-remove text-danger">
 														</i>
 													</a><?php
-													if ($order_data["ordernum_category"] == 'Comni arhi naw
-													pleted'){
+													if ($order_data["ordernum_category"] == 'Completed'){
 				?>
                          							 <a href="order_update.php?user_id=<?php echo$order_data["id"]; ?>&&price=<?php echo$subtotal; ?>" style="cursor:pointer;" title="Move Data" data-toggle="tooltip" data-original-title="Save To sale">
 														<i class="fa fa-upload text-success">
