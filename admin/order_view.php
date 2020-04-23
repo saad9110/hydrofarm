@@ -67,8 +67,6 @@ session_start();
 													<td><?php echo $order_data["order_Date"] ;?></td>
 													<td><?php echo $order_data["firstname"] ;?> &nbsp; <?php echo $order_data["lastname"] ;?></td>
 													<td> <?php
-	 //$total = 0 ;
-
 													$price = "SELECT * FROM `products` p inner join `order` o on p.id = o.product_id where o.ordernum_id ='".$order_data["ordernum_id"]."' ";
 													$results = $con->query($price);
 													
@@ -91,8 +89,8 @@ session_start();
 														<i class="fa fa-eye">
 														</i>
 													</a>
-													<!-- <button type="button" data-toggle="modal" data-target="#myModal">Open Modal</button> -->
-													<a onclick="update(<?php echo$order_data["ordernum_id"]; ?>)" title="complete"  data-toggle="tooltip" data-original-title="Edit">
+													
+													<a onclick="compelte(<?php echo$order_data["ordernum_id"]; ?>)" title="complete"  data-toggle="tooltip" data-original-title="Edit">
 														<i class="fa fa-check">
 														</i>
 													</a>
