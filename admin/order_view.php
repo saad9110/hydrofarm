@@ -90,17 +90,17 @@ session_start();
 														</i>
 													</a>
 													
-													<a onclick="update(<?php echo$order_data["ordernum_id"]; ?>)" style="cursor:pointer;" title="complete"  data-toggle="tooltip" data-original-title="Edit">
+													<a onclick="updateComplete(<?php echo $order_data["ordernum_id"]; ?>)" style="cursor:pointer;" title="complete"  data-toggle="tooltip" data-original-title="Edit">
 														<i class="fa fa-check">
 														</i>
 													</a>
-													<a onclick="Cancel(<?php echo$order_data["ordernum_id"];?>)" style="cursor:pointer;" title="Cancel" data-toggle="tooltip" data-original-title="Delete">
+													<a onclick="updateCancel(<?php echo $order_data["ordernum_id"];?>)" style="cursor:pointer;" title="Cancel" data-toggle="tooltip" data-original-title="Delete">
 														<i class="fa fa-remove text-danger">
 														</i>
 													</a><?php
 													if ($order_data["ordernum_category"] == 'Completed'){
-				?>
-                         							 <a href="order_update.php?user_id=<?php echo$order_data["id"]; ?>&&price=<?php echo$subtotal; ?>" style="cursor:pointer;" title="Move Data" data-toggle="tooltip" data-original-title="Save To sale">
+																			?>
+                         							 <a href="order_update.php?user_id=<?php echo$order_data["id"]; ?>&&price=<?php echo$subtotal; ?>&requestType=move" style="cursor:pointer;" title="Move Data" data-toggle="tooltip" data-original-title="Save To sale">
 														<i class="fa fa-upload text-success">
 														</i>
 													</a>
@@ -205,13 +205,12 @@ session_start();
 	});
 </script>
 <script type="text/javascript">
-	function update(pid)
+	
+	function updateComplete(pid)
 	{
-    
 		$.ajax(
 			{
-        
-				url: "order_update.php?updateid="+pid,
+				url: "order_update.php?updateid="+pid+"&requestType=update",
 				type: "GET",
 				// data:  new FormData(this),
 				contentType: false,
@@ -223,16 +222,13 @@ session_start();
 					location.reload();
 				}
 			});
-  }
+  	}
   
-  function Cancel(pid)
+  function updateCancel(pid)
 	{
-
-    
 		$.ajax(
 			{
-        
-				url: "order_update.php?deleteid="+pid,
+				url: "order_update.php?deleteid="+pid+"&requestType=cancel",
 				type: "GET",
 				// data:  new FormData(this),
 				contentType: false,
@@ -251,8 +247,7 @@ session_start();
     debugger;
 		$.ajax(
 			{
-        
-				url: "order_update.php?name="+name+"price"+price,
+				url: "order_update.php?name="+name+"price"+price+"&requestType=move",
 				type: "GET",
 				// data:  new FormData(this),
 				contentType: false,

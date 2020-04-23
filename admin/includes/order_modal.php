@@ -7,12 +7,13 @@
 		exit;
   }
   
-	$id = $_GET['id'];
-	$query = "SELECT * FROM `order` o 
-	join `products` p on o.product_id = p.id
-	join `ordernumber` t on o.ordernum_id = t.ordernum_id WHERE o.ordernum_id = '".$id."'";
-	$row =$con->query($query);
-  $subtotal=0;  $total = 0;
+  // $id = $_GET['id'];
+
+	// $query = "SELECT * FROM `order` o 
+	// join `products` p on o.product_id = p.id
+	// join `ordernumber` t on o.ordernum_id = t.ordernum_id WHERE o.ordernum_id = '".$id."'";
+	// $row =$con->query($query);
+  // $subtotal=0;  $total = 0;
   
 	?>
 <!-- View Order -->
