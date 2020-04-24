@@ -30,8 +30,8 @@
 
 				foreach($stmt as $row){
 
-					$stmt = $conn->prepare("INSERT INTO `details` (order_id, product_id, quantity) VALUES (:order_id, :product_id, :quantity)");
-					$stmt->execute(['order_id'=>$row['id'], 'product_id'=>$row['product_id'], 'quantity'=>$row['quantity']]);
+					$stmt = $conn->prepare("INSERT INTO `details` (order_id, product_id, quantity, ordernum_id) VALUES (:order_id, :product_id, :quantity, :ordernum_id)");
+					$stmt->execute(['order_id'=>$row['id'], 'product_id'=>$row['product_id'], 'quantity'=>$row['quantity'], 'ordernum_id'=>$row['ordernum_id']]);
 				}
 				$stmt = $conn->prepare("DELETE FROM cart WHERE user_id=:user_id");
 				$stmt->execute(['user_id'=>$user['id']]);
