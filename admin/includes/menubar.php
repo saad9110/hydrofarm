@@ -31,12 +31,28 @@
           <?php
             if(isset($_SESSION['SuperAdmin'])){
               echo '<li><a href="admin_users.php"><i class="fa fa-circle-o"></i>Admin</a></li>';
-            }
+            }                   
+
           ?>
+
         </ul>
       </li>
-      <li><a href="guidelines.php"><i class="fa fa-users"></i> <span>Guidelines</span></a></li>
-      <li><a href="order_view.php"><i class="fa fa-first-order"></i> <span>Orders</span></a></li>
+      <li class="treeview">
+        <a href="#">
+          <i class="fa fa-barcode"></i>
+          <span>Guidelines</span>
+          <span class="pull-right-container">
+            <i class="fa fa-angle-left pull-right"></i>
+          </span>
+        </a>
+        <ul class="treeview-menu">
+          <li><a href="guidelines.php"><i class="fa fa-circle-o"></i> Guidelines List</a></li>
+          <li><a href="guidelines_category.php"><i class="fa fa-circle-o"></i> Guidelines Category</a></li>
+        </ul>
+      </li>
+      
+      <li><a href="order_view.php" onclick="vieworder('ordercheck')"><i class="fa fa-first-order"></i> <span>Orders</span>
+       <span class="badge" id="badge"></span></a></li>
       <li><a href="#"><i class="fa fa-users"></i> <span>Blogs</span></a></li>
       <li><a href="#"><i class="fa fa-users"></i> <span>Forums</span></a></li>
 
@@ -57,3 +73,56 @@
   </section>
   <!-- /.sidebar -->
 </aside>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script type="text/javascript">
+   function vieworder(orderstatus)
+  {
+    debugger;
+    $.ajax(
+      {
+        
+        url: "updateorderstatus.php?orderstatus="+orderstatus,
+        type: "GET",
+        // data:  new FormData(this),
+        contentType: false,
+        cache: false,
+        processData:false,
+        dataType: "html",
+        success: function (result)
+        {
+           getbadge();
+          //location.reload();
+        }
+      });
+  }
+
+ 
+    $(document).ready(function() {
+  getbadge();
+});
+   
+function getbadge(){
+    getstatus = "neworder";
+    debugger;
+    $.ajax(
+      {
+        
+        url: "updateorderstatus.php?orderstatus="+getstatus,
+        type: "GET",
+        // data:  data,
+        contentType: false,
+        cache: false,
+        processData:false,
+        dataType: 'json',
+        success: function (data)
+        {
+       //  $('#badge').html(response);
+          //location.reload();
+        }
+      });
+  }
+
+
+
+</script>

@@ -51,7 +51,8 @@
                     $conn = $pdo->open();
 
                     try{
-                      $stmt = $conn->prepare("SELECT *, sales.id AS salesid FROM sales LEFT JOIN users ON users.id=sales.user_id ORDER BY sales_date DESC");
+                      $stmt = $conn->prepare("SELECT *, sales.id AS salesid FROM sales  JOIN ordernumber ON ordernumber.ordernum_id=sales.order_id 
+                      join users on users.id = ordernumber.id ");
                       $stmt->execute();
                       foreach($stmt as $row){
                         $stmt = $conn->prepare("SELECT * FROM details LEFT JOIN products ON products.id=details.product_id WHERE details.order_id=:id");
@@ -61,15 +62,29 @@
                           $subtotal = $details['price']*$details['quantity'];
                           $total += $subtotal;
                         }
+                          
+
                         echo "
                           <tr>
                             <td class='hidden'></td>
                             <td>".date('M d, Y', strtotime($row['sales_date']))."</td>
                             <td>".$row['firstname'].' '.$row['lastname']."</td>
-                            <td>&#36;".$row['pay_id']."</td>
-                            <td><button type='button' class='btn btn-info btn-sm btn-flat view' data-id='".$row['salesid']."'><i class='fa fa-search'></i> View</button>
-                            <button type='button' class='btn btn-danger btn-sm btn-flat del' data-id='".$row['salesid']."'><i class='fa fa-search'></i> Delete</button></td>
-                          </tr>
+                            <td>&#36;".$row['pay_id']."</td> "; ?>
+                            <td><a href="order_details.php?id=<?php echo$row['order_id'];?>" title="Details" data-toggle="tooltip" data-original-title="view">
+														<i class="fa fa-eye">
+														</i>
+													</a>
+                          
+                          <a href="updateorderstatus.php?condeleteid=<?php echo$row['order_id']; ?>" style="cursor:pointer;" title="Cancel" data-toggle="tooltip" data-original-title="Delete">
+														<i class="fa fa-remove text-danger">
+														</i>
+													</a>
+                          
+                          </td>
+                          
+                          <?php echo "</button>
+                           
+                         
                         ";
                       }
                     }

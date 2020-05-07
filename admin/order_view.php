@@ -1,22 +1,112 @@
 <?php include 'includes/session.php'; ?>
 	<?php include 'includes/header.php'; ?>
 	<body class="hold-transition skin-blue sidebar-mini">
-		<div class="wrapper">
+		<div class="wrapper">	<?php
 session_start();
-			<?php include 'includes/navbar.php'; ?>
-			<?php include 'includes/menubar.php'; ?>
-			<?php include 'includes/order_modal.php'; ?>
-
-			
-			<!--Start -->
-
-
-			<!--End -->
+		 include 'includes/navbar.php'; ?>
+			<?php include 'includes/menubar.php'; 
+				$con = @mysqli_connect('localhost', 'root', '', 'ecomm'); ?>
 
 			<!-- Content Wrapper. Contains page content -->
 			<div class="content-wrapper">
 				<!-- Content Header (Page header) -->
 				<section class="content-header">
+					<div class="jumbotron">
+						<div class="col-3">
+							<table>
+							<div class="col-lg-3 col-xs-6">
+							<div class="small-box bg-orange">
+								<div class="inner">
+									<?php
+									$query_email = "SELECT * FROM `ordernumber`";
+									$result2 = mysqli_query($con, $query_email);
+									$result2 = mysqli_num_rows($result2);
+
+									echo $result2."";
+									?>
+								
+									<p>Total Orders</p>
+								</div>
+								<div class="icon">
+									<i class="fa fa-barcode"></i>
+								</div>
+								<a href="#" class="small-box-footer"> <i class="fa fa-arrow-circle-right"></i></a>
+							</div>
+							</div>
+							</table>
+
+							<table>
+							<div class="col-lg-3 col-xs-6">
+							<div class="small-box bg-yellow">
+								<div class="inner">
+									<?php
+										$query_email = "SELECT * FROM `ordernumber` where `ordernum_category` = 'Pending' ";
+										$result2 = mysqli_query($con, $query_email);
+										$result2 = mysqli_num_rows($result2);
+	
+										echo $result2."";
+									?>
+								
+									<p>Pending Orders</p>
+								</div>
+								<div class="icon">
+									<i class="fa fa-barcode"></i>
+								</div>
+								<a href="#" class="small-box-footer"> <i class="fa fa-arrow-circle-right"></i></a>
+							</div>
+							</div>
+							</table>
+				
+
+
+							<table>
+							<div class="col-lg-3 col-xs-6">
+							<div class="small-box bg-red">
+								<div class="inner">
+									<?php
+										$query_email = "SELECT * FROM `ordernumber` where `ordernum_category` = 'Cancel'  ";
+										$result2 = mysqli_query($con, $query_email);
+										 $result2 = mysqli_num_rows($result2);
+									   
+									   echo $result2.""; 
+									?>
+								
+									<p>Cancel Orders</p>
+								</div>
+								<div class="icon">
+									<i class="fa fa-barcode"></i>
+								</div>
+								<a href="#" class="small-box-footer"> <i class="fa fa-arrow-circle-right"></i></a>
+							</div>
+							</div>
+							</table>
+
+							<table>
+							<div class="col-lg-3 col-xs-6">
+							<div class="small-box bg-green">
+								<div class="inner">
+									<?php
+										$query_email = "SELECT * FROM `ordernumber` where `ordernum_category` ='Completed'  ";
+										$result2 = mysqli_query($con, $query_email);
+										 $result2 = mysqli_num_rows($result2);
+									   
+									   echo $result2."";
+									?>
+								
+									<p>Completed Orders</p>
+								</div>
+								<div class="icon">
+									<i class="fa fa-barcode"></i>
+								</div>
+								<a href="#" class="small-box-footer"> <i class="fa fa-arrow-circle-right"></i></a>
+							</div>
+							</div>
+							</table>
+
+					
+							</tr>
+						</div>
+					</div>
 					<h1>
 						Order History
 					</h1>
@@ -28,34 +118,12 @@ session_start();
 
 				<!-- Main content -->
 				<section class="content">
-				<?php
-					if(isset($_SESSION['error'])){
-					echo "
-						<div class='alert alert-danger alert-dismissible'>
-						<button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button>
-						<h4><i class='icon fa fa-warning'></i> Error!</h4>
-						".$_SESSION['error']."
-						</div>
-					";
-					unset($_SESSION['error']);
-					}
-					if(isset($_SESSION['success'])){
-					echo "
-						<div class='alert alert-success alert-dismissible'>
-						<button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button>
-						<h4><i class='icon fa fa-check'></i> Success!</h4>
-						".$_SESSION['success']."
-						</div>
-					";
-					unset($_SESSION['success']);
-					}
-    				  ?>
 					<div class="row">
 						<div class="col-xs-12">
 							<div class="box">
 								<div class="box-header with-border">
 									<div class="pull-right">
-										<form method="POST" class="form-inline" action="order_print.php">
+										<form method="POST" class="form-inline" action="sales_print.php">
 											<div class="input-group">
 												<div class="input-group-addon">
 													<i class="fa fa-calendar"></i>
@@ -79,7 +147,7 @@ session_start();
 										</thead>
 										<tbody>
 											<?php
-											$con = @mysqli_connect('localhost', 'root', '', 'ecomm');
+										
 											$orders = "SELECT * FROM ordernumber o inner join users p on o.id = p.id";
 											$result = $con->query($orders);
 											while($order_data = mysqli_fetch_array($result)) :
@@ -89,6 +157,8 @@ session_start();
 													<td><?php echo $order_data["order_Date"] ;?></td>
 													<td><?php echo $order_data["firstname"] ;?> &nbsp; <?php echo $order_data["lastname"] ;?></td>
 													<td> <?php
+	 //$total = 0 ;
+
 													$price = "SELECT * FROM `products` p inner join `order` o on p.id = o.product_id where o.ordernum_id ='".$order_data["ordernum_id"]."' ";
 													$results = $con->query($price);
 													
@@ -105,29 +175,29 @@ session_start();
 													?>
 												</td>
 												<td> <?php echo $order_data["ordernum_category"] ;?> </td>
-												
 												<td>
-													 <a type="button" data-toggle="modal" data-target="#myModal">
-														<i class="fa fa-eye" >
+													<a href="order_details.php?id=<?php echo$order_data["ordernum_id"];?>" title="Details" data-toggle="tooltip" data-original-title="view">
+														<i class="fa fa-eye">
 														</i>
 													</a>
-													
-													<a onclick="updateComplete(<?php echo $order_data["ordernum_id"]; ?>)" style="cursor:pointer;" title="complete"  data-toggle="tooltip" data-original-title="Edit">
+													<a onclick="update(<?php echo$order_data["ordernum_id"]; ?>)" title="complete"  data-toggle="tooltip" data-original-title="Edit">
 														<i class="fa fa-check">
 														</i>
 													</a>
-													<a onclick="updateCancel(<?php echo $order_data["ordernum_id"];?>)" style="cursor:pointer;" title="Cancel" data-toggle="tooltip" data-original-title="Delete">
+													<a onclick="Cancel(<?php echo$order_data["ordernum_id"]; ?>)" style="cursor:pointer;" title="Cancel" data-toggle="tooltip" data-original-title="Delete">
 														<i class="fa fa-remove text-danger">
 														</i>
-													</a><?php
-													if ($order_data["ordernum_category"] == 'Completed'){
-																			?>
-                         							 <a href="order_update.php?user_id=<?php echo$order_data["id"]; ?>&&price=<?php echo$subtotal; ?>&requestType=move" style="cursor:pointer;" title="Move Data" data-toggle="tooltip" data-original-title="Save To sale">
+													</a>
+							<?php
+						//$user_id = $_SESSION['user'] ;
+						if($order_data["ordernum_category"] == 'Completed'){
+						?>
+                          <a href="updateorderstatus.php?user_id=<?php echo$order_data["ordernum_id"]; ?>&&price=<?php echo$subtotal; ?>" style="cursor:pointer;" title="Move Data" data-toggle="tooltip" data-original-title="Save To sale">
 														<i class="fa fa-upload text-success">
 														</i>
 													</a>
-													<?php } ?>
-												</td>
+
+												</td><?php } ?>
 												<?php
 	             // print_r ($order_data);
 	              //echo "<br>";
@@ -144,6 +214,8 @@ session_start();
 				
 			</div>
 			<?php include 'includes/footer.php'; ?>
+			<?php include 'includes/order_modal.php'; ?>
+
 		</div>
 		<!-- ./wrapper -->
 
@@ -167,11 +239,6 @@ session_start();
 	  	getRow(id);
 	  });
 	  
-  $(document).on('click', '.desc', function(e){
-    e.preventDefault();
-    var id = $(this).data('id');
-    getRow(id);
-  });
 	  //Timepicker
 	  $('.timepicker').timepicker({
 	  	showInputs: false
@@ -227,12 +294,13 @@ session_start();
 	});
 </script>
 <script type="text/javascript">
-	
-	function updateComplete(pid)
+	function update(pid)
 	{
+    
 		$.ajax(
 			{
-				url: "order_update.php?updateid="+pid+"&requestType=update",
+        
+				url: "updateorderstatus.php?updateid="+pid,
 				type: "GET",
 				// data:  new FormData(this),
 				contentType: false,
@@ -244,13 +312,16 @@ session_start();
 					location.reload();
 				}
 			});
-  	}
+  }
   
-  function updateCancel(pid)
+  function Cancel(pid)
 	{
+
+    
 		$.ajax(
 			{
-				url: "order_update.php?deleteid="+pid+"&requestType=cancel",
+        
+				url: "updateorderstatus.php?deleteid="+pid,
 				type: "GET",
 				// data:  new FormData(this),
 				contentType: false,
@@ -269,7 +340,8 @@ session_start();
     debugger;
 		$.ajax(
 			{
-				url: "order_update.php?name="+name+"price"+price+"&requestType=move",
+        
+				url: "updateorderstatus.php?name="+name+"price"+price,
 				type: "GET",
 				// data:  new FormData(this),
 				contentType: false,
