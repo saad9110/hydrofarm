@@ -25,7 +25,6 @@
 			}
 		}
 	}
-
 	$pdo->close();
 	echo json_encode($output);
 

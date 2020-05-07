@@ -64,8 +64,7 @@
 	        			else{
 	        				echo "
 	        					<h4>You need to <a href='login.php'>Login</a> to checkout.</h4>
-	        				";
-	        			}
+	        				";	}
 	        		?>
 	        	</div>
 	        	<div class="col-sm-3">
