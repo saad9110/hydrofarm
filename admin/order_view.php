@@ -205,11 +205,11 @@
 														<i class="fa fa-eye">
 														</i>
 													</a>
-													<a onclick="update(<?php echo$order_data["ordernum_id"]; ?>)" title="complete"  data-toggle="tooltip" data-original-title="Edit">
+													<a href=updateorderstatus.php?updateid=<?php echo$order_data["ordernum_id"]; ?>" title="complete"  data-toggle="tooltip" data-original-title="Edit">
 														<i class="fa fa-check">
 														</i>
 													</a>
-													<a onclick="Cancel(<?php echo$order_data["ordernum_id"]; ?>)" style="cursor:pointer;" title="Cancel" data-toggle="tooltip" data-original-title="Delete">
+													<a href=updateorderstatus.php?deleteid=<?php echo$order_data["ordernum_id"]; ?>" style="cursor:pointer;" title="Cancel" data-toggle="tooltip" data-original-title="Delete">
 														<i class="fa fa-remove text-danger">
 														</i>
 													</a>
@@ -335,6 +335,7 @@
 				success: function (result)
 				{
 					location.reload();
+					$('#sucess').html("sucess");
 				}
 				
 			});

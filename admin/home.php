@@ -196,8 +196,9 @@
   $sales = array();
   for( $m = 1; $m <= 12; $m++ ) {
     try{
-      $stmt = $conn->prepare("SELECT * FROM details LEFT JOIN sales ON sales.id=details.sales_id LEFT JOIN products ON products.id=details.product_id WHERE MONTH(sales_date)=:month AND YEAR(sales_date)=:year");
-      $stmt->execute(['month'=>$m, 'year'=>$year]);
+      $stmt = $conn->prepare("SELECT * FROM details LEFT JOIN sales ON sales.order_id=details.order_id LEFT JOIN products ON products.id=details.product_id WHERE MONTH(sales_date)=:month AND YEAR(sales_date)=:year");
+   //  $stmt = $conn->prepare("SELECT * FROM sales ");
+     $stmt->execute(['month'=>$m, 'year'=>$year]);
       $total = 0;
       foreach($stmt as $srow){
         $subtotal = $srow['price']*$srow['quantity'];
@@ -206,7 +207,7 @@
       array_push($sales, round($total, 2));
     }
     catch(PDOException $e){
-      echo $e->getMessage();
+      //echo $e->getMessage();
     }
 
     $num = str_pad( $m, 2, 0, STR_PAD_LEFT );

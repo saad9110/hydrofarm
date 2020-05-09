@@ -97,11 +97,15 @@
 														</i>
 													</a>
                           
-                          <a href="updateorderstatus.php?condeleteid=<?php echo$row['order_id']; ?>" style="cursor:pointer;" title="Cancel" data-toggle="tooltip" data-original-title="Delete">
+                          <!-- <a href="updateorderstatus.php?condeleteid=<?php echo$row['order_id']; ?>" style="cursor:pointer;" title="Cancel" data-toggle="tooltip" data-original-title="Delete">
 														<i class="fa fa-remove text-danger">
 														</i>
 													</a>
-                          
+                          --- -->
+                          <a onclick="alert(<?php echo$row['order_id']; ?>)" style="cursor:pointer;" title="Cancel" data-toggle="tooltip" data-original-title="Delete">
+														<i class="fa fa-remove text-danger">
+														</i>
+													</a>
                           </td>
                           
                           <?php echo "</button>
@@ -199,6 +203,35 @@ $(function(){
       $('.prepend_items').remove();
   });
 });
+
+
+
+function alert(id){
+$('#myModal').modal('show');
+$("#link").attr("href", 'updateorderstatus.php?condeleteid='+id);
+
+}
 </script>
+<div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Modal Header</h4>
+        </div>
+        <div class="modal-body">
+          <p>Are you sure You want to delete.</p>
+        </div>
+        <div class="modal-footer">
+        <a class="btn btn-default" href="" id="link">Confirm
+													</a>
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+      
+    </div>
+  </div>
 </body>
 </html>
