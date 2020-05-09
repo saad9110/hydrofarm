@@ -57,9 +57,10 @@
 							echo "
 								
 								<button class='btn btn-info btn-sm btn-flat' onClick='getO()'><i class='fa fa-search'></i> Submit </button>
+								".$_SESSION['error']= 'Order has been Placed'."
 
 							";
-							$_SESSION['success'] = 'Order has been Placed';
+							
 	        			}
 	        			else{
 	        				echo "

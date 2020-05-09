@@ -1,3 +1,4 @@
+<?php include 'includes/session.php'; ?>
 <?php
 error_reporting(0);
 session_start();
@@ -40,12 +41,15 @@ if($update != 0){
    $sql = "update `ordernumber` set ordernum_category = 'Completed' where ordernum_id = '".$update."'"; 
    $result = $con->query($sql);
     header("Location: order_view.php");
+    $_SESSION['success'] = 'Order has been Completed';
 }
 
 if($cancel != null){
     $sql = "update `ordernumber` set ordernum_category = 'Cancel' where ordernum_id = '".$cancel."'"; 
     $update_result = $con->query($sql);
     header("Location: order_view.php");
+    $_SESSION['error'] = 'Order has been Cancel';
+    
 }
 //$name = $_GET['name'];
 $price = $_GET['price'];
@@ -64,10 +68,11 @@ if($result2 <= 0)
 $sql = "INSERT INTO `sales` (pay_id,order_id) VALUES ('$price','$user_id')";
 $result= $con->query($sql);
 header("Location: order_view.php");
+$_SESSION['success'] = 'Order has been added into Sales';
 }
 else{
     header("Location: order_view.php");
-    echo "alreday exists" ; 
+    $_SESSION['error'] = 'Order Already Exist';
 }
 }
 
@@ -76,5 +81,6 @@ if($del != null){
 $sql = "DELETE FROM `sales` WHERE `order_id` = $del";
 $result= $con->query($sql);
 header("Location: sales.php");
+$_SESSION['success'] = 'Order has successfully removed from sales';
 }
 ?>
