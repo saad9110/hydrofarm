@@ -113,9 +113,9 @@ function education_fields() {
               <h4 class="modal-title"><b>Generate Notification</b></h4>
             </div>
             <div class="modal-body">
-              <form class="form-horizontal" method="POST"  enctype="multipart/form-data">
+              <form  method="POST" action="push_notification.php" class="form-horizontal" enctype="multipart/form-data">
                 <div class="form-group">
-                    <label for="title" class="col-sm-3 control-label">Title</label>
+                    <label for="title" class="col-sm-3 ucontrol-label">Title</label>
 
                     <div class="col-sm-9">
                       <input type="text" class="form-control" id="title" name="title" required>
