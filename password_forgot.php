@@ -35,8 +35,8 @@
       		</div>
     	</form>
       <br>
-      <a href="login.php">I rememberd my password</a><br>
-      <a href="index.php"><i class="fa fa-home"></i> Home</a>
+      <a href="index.php">I rememberd my password</a><br>
+     
   	</div>
 </div>
 	

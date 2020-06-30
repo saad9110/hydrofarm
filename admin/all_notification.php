@@ -13,7 +13,7 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        Users
+        All Notification
       </h1>
       <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
@@ -77,17 +77,15 @@
                   </div>
                 </form>
               </div>
-                 <a href="#addnewnoti"  data-toggle="modal" class="btn btn-info btn-sm btn-flat pull-right"><i class="fa fa-plus"></i> Generate Custom Notification</a>
-                 <a href="all_notification.php" class="btn btn-info btn-sm btn-flat pull-right"> See All Notification</a>
-              </div>
+            </div>
             <div class="box-body">
               <table id="example1" class="table table-bordered">
                 <thead>
                   <th>Photo</th>
                   <th>Email</th>
                   <th>Name</th>
-                  <th class="hide">Token</th>
                   <th>Status</th>
+                  <th>Date Added</th>
                 </thead>
                 <tbody>
                   <?php
@@ -106,14 +104,12 @@
                             </td>
                             <td>".$row['email']."</td>
                             <td>".$row['firstname'].' '.$row['lastname']."</td>
-                            
                           
-                            
+                            <td>".date('M d, Y', strtotime($row['created_on']))."</td>
                             <td>
                               
-                              
-                              <button class='btn btn-danger btn-sm delete btn-flat' data-id='".$row['id']."'><i class='fa fa-trash'></i> Delete</button>
-                              <button class='btn btn-warning btn-sm sendnoti btn-flat' data-token='".$row['token']."'><i class='fa fa-send'></i> Send Notification</button>
+                            
+                              <button class='btn btn-info btn-sm viewnoti btn-flat'><i class='fa fa-send'></i> View</button>
                             </td>
                           </tr>
                         ";
@@ -144,36 +140,18 @@
 <script>
 $(function(){
 
-  $(document).on('click', '.edit', function(e){
-    e.preventDefault();
-    $('#edit').modal('show');
-    var id = $(this).data('id');
-    getRow(id);
-  });
+
 
   
-  $(document).on('click', '.sendnoti', function(e){
+  $(document).on('click', '.viewnoti', function(e){
     e.preventDefault();
-    $('#sendnoti').modal('show');
-    var id = $(this).data('id');
-    var token=$(this).attr('data-token');
-    $('#sendnoti .form-group:nth-child(2) input').val(token);
-   // alert(email);
-    getRow(id);
-  });
-
-  $(document).on('click', '.delete', function(e){
-    e.preventDefault();
-    $('#delete').modal('show');
+    $('#viewnoti').modal('show');
     var id = $(this).data('id');
     getRow(id);
   });
 
-  $(document).on('click', '.photo', function(e){
-    e.preventDefault();
-    var id = $(this).data('id');
-    getRow(id);
-  });
+
+
 
   $(document).on('click', '.status', function(e){
     e.preventDefault();
@@ -186,7 +164,7 @@ $(function(){
 function getRow(id){
   $.ajax({
     type: 'POST',
-    url: 'users_row.php',
+    url: 'notification_row.php',
     data: {id:id},
     dataType: 'json',
     success: function(response){
@@ -196,7 +174,6 @@ function getRow(id){
       $('#edit_firstname').val(response.firstname);
       $('#edit_lastname').val(response.lastname);
       $('#edit_address').val(response.address);
-      var token = $('#edit_token').val(response.token);
       $('#edit_contact').val(response.contact_info);
       $('.fullname').html(response.firstname+' '+response.lastname);
     }

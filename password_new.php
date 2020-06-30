@@ -31,7 +31,7 @@
 					$stmt->execute(['password'=>$password, 'id'=>$row['id']]);
 
 					$_SESSION['success'] = 'Password successfully reset';
-					header('location: login.php');
+					header('location: index.php');
 				}
 				catch(PDOException $e){
 					$_SESSION['error'] = $e->getMessage();

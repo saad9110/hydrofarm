@@ -53,8 +53,8 @@
       
       <li><a href="order_view.php" onclick="vieworder('ordercheck')"><i class="fa fa-first-order"></i> <span>Orders</span>
        <span class="badge" id="badge"></span></a></li>
-      <li><a href="#"><i class="fa fa-users"></i> <span>Blogs</span></a></li>
-      <li><a href="#"><i class="fa fa-users"></i> <span>Forums</span></a></li>
+      <!-- <li><a href="#"><i class="fa fa-users"></i> <span>Blogs</span></a></li>
+      <li><a href="#"><i class="fa fa-users"></i> <span>Forums</span></a></li> -->
 
       <li class="treeview">
         <a href="#">

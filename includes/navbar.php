@@ -83,7 +83,7 @@
 
                       <p>
                         '.$user['firstname'].' '.$user['lastname'].'
-                        <small>Member since '.date('M. Y', strtotime($user['created_on'])).'</small>
+                        
                       </p>
                     </li>
                     <li class="user-footer">

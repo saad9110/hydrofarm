@@ -75,8 +75,8 @@
       		</div>
     	</form>
       <br>
-      <a href="login.php">I already have a membership</a><br>
-      <a href="index.php"><i class="fa fa-home"></i> Home</a>
+      <a href="index.php">I already have a membership</a><br>
+      
   	</div>
 </div>
 	

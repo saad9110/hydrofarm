@@ -1,6 +1,93 @@
+<?php include 'includes/users.php';?>
 
 <!-- Send Custom Notification -->
 <div class="modal fade" id="addnewnoti">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span></button>
+              <h4 class="modal-title"><b>Generate Custom Notification</b></h4>
+            </div>
+            <div class="modal-body">
+              <form class="form-horizontal" method="POST"  enctype="multipart/form-data">
+                <div class="form-group">
+                    <label for="title" class="col-sm-3 control-label">Title</label>
+
+                    <div class="col-sm-9">
+                      <input type="text" class="form-control" id="title" value="vgvgcgc" name="title" required>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="description" class="col-sm-3 control-label">Description</label>
+
+                    <div class="col-sm-9">
+                      <textarea class="form-control" id="description" name="description" required></textarea>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="photo" class="col-sm-3 control-label" >Photo</label>
+
+                    <div class="col-sm-9">
+                      <input type="file" id="photo" name="photo" required>
+                    </div>
+                </div>
+                <div class="form-group" >
+                    <label for="reccomendation" class="col-sm-3 control-label">Reccomendation</label>
+                    <div class="panel-body col-sm-9">
+                        <div id="education_fields"></div>
+                            <div class="col-sm-4 nopadding">
+                                <div class="form-group">
+                                    <input type="text" class="form-control" id="proname" name="proname[]" value="" placeholder="Product Name">
+                                </div>
+                            </div>
+                            <div class="col-sm-4 nopadding">
+                                <div class="form-group">
+                                    <input type="number" class="form-control" id="proqun" name="proqun[]" value="" placeholder="Product Quntity">
+                                </div>
+                            </div>
+                            <div class="col-sm-3 nopadding">
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <div class="input-group-btn">
+                                            <button class="btn btn-success" type="button"  onclick="education_fields();"> <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                      </div>
+                        <div class="clear"></div>
+                  </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">  </label>
+                            <div class="col-sm-8 control-label">
+                                <div class="panel-footer control-label">
+                                    <small>Press <span class="glyphicon glyphicon-plus gs"></span> to add another form field :)</small>, <small>Press <span class="glyphicon glyphicon-minus gs"></span> to remove form field :)</small>
+                                </div>
+                            </div>
+                    </div>
+        
+            
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default btn-flat pull-left" data-dismiss="modal"><i class="fa fa-close"></i> Close</button>
+                        <button type="submit" class="btn btn-primary btn-flat " name="send" ><i class="fa fa-send"></i>Send</button>
+                        </form>
+                   
+                    </div>
+                
+              </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-------------View Notification-------------------------->
+
+<div class="modal fade" id="viewnoti">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -118,7 +205,15 @@ function education_fields() {
                     <label for="title" class="col-sm-3 ucontrol-label">Title</label>
 
                     <div class="col-sm-9">
-                      <input type="text" class="form-control" id="title" name="title" required>
+                      <input type="text" value="" class="form-control"  name="title" required>
+                    </div>
+                </div>
+
+                <div class="form-group hide">
+                    <label for="token" class="col-sm-3 ucontrol-label">Token</label>
+
+                    <div class="col-sm-9">
+                      <input type="text" value="" class="form-control" name="token" required>
                     </div>
                 </div>
                 
@@ -126,18 +221,20 @@ function education_fields() {
                     <label for="description" class="col-sm-3 control-label">Description</label>
 
                     <div class="col-sm-9">
-                      <textarea class="form-control" id="description" name="description" required></textarea>
+                      <textarea class="form-control"  name="description" required></textarea>
                     </div>
                 </div>
 
+              <!-- </div>
                 <div class="form-group">
                     <label for="photo" class="col-sm-3 control-label" >Photo</label>
 
                     <div class="col-sm-9">
                       <input type="file" id="photo" name="photo" required>
                     </div>
-                </div>
-                <div class="form-group" >
+                </div> -->
+                
+                <!-- <div class="form-group" >
                     <label for="reccomendation" class="col-sm-3 control-label">Reccomendation</label>
                     <div class="panel-body col-sm-9">
                         <div id="specific_user_notification"></div>
@@ -162,7 +259,7 @@ function education_fields() {
                             </div>
                       </div>
                         <div class="clear"></div>
-                  </div>
+                  </div> -->
 
                     <div class="form-group">
                         <label class="col-sm-3 control-label">  </label>

@@ -22,10 +22,10 @@
 				$stmt->execute(['code'=>$code, 'id'=>$row['id']]);
 				
 				$message = "
-					<h2>Password Reset</h2>
-					<p>Your Account:</p>
-					<p>Email: ".$email."</p>
-					<p>Please click the link below to reset your password.</p>
+					Password Reset
+					Your Account:
+					Email: ".$email."
+					Please click the link below to reset your password.
 					<a href='http://localhost/hydrofarm/password_reset.php?code=".$code."&user=".$row['id']."'>Reset Password</a>
 				";
 
